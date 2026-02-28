@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "vocad-trainer",
+    "name": "Wordy",
     "slug": "vocad-trainer",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -21,10 +21,17 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.demon_uga.vocadtrainer"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "454063c9-4224-4d32-841f-12d5df507efb"
+      }
+    },
+    "owner": "demon_uga"
   }
 }

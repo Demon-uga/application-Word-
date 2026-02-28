@@ -1,5 +1,6 @@
 import { StyleSheet, TextInput, View, Button, Modal } from "react-native";
 import { useState } from "react";
+import MyButton from "./MyButton";
 
 export default function ModalImput({ modal, onSave, onClose }) {
   const [translation, setTranslation] = useState("");
@@ -22,17 +23,17 @@ export default function ModalImput({ modal, onSave, onClose }) {
             style={styles.input}
             onChangeText={setTranslation}
             value={translation}
-            placeholder="Перевод"
+            placeholder="Translation..."
           />
           <TextInput
             style={styles.input}
             onChangeText={setExample}
             value={example}
-            placeholder="Пример"
+            placeholder="example..."
           />
           <View style={styles.buttonRow}>
-            <Button title="Добавить" onPress={addCard} />
-            <Button title="Отмена" onPress={() => onClose()} />
+            <MyButton iconName="add-circle" text="Add" color="#386c3c" onPress={addCard} />
+            <MyButton iconName="close" text="Cancel" color="rgb(141, 31, 31)" onPress={() => onClose()} />
           </View>
         </View>
       </View>
@@ -43,10 +44,11 @@ export default function ModalImput({ modal, onSave, onClose }) {
 const styles = StyleSheet.create({
   input: {
     height: 40,
-    width: 200,
-    backgroundColor: "#c0d6f5",
+    width: "97%",
+    backgroundColor: "#c9dffd",
     borderColor: "gray",
     borderWidth: 1,
+    margin: 5
   },
   modalContainer: {
     flex: 1,
@@ -55,15 +57,18 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(0,0,0,0.5)",
   },
   modalContent: {
-    backgroundColor: "white",
+    backgroundColor: "#1e293b",
     padding: 20,
-    borderRadius: 10,
+    borderRadius: 30,
     width: "80%",
     maxWidth: 400,
+    borderWidth: 1,
+    borderColor: "#ff954f",
   },
   buttonRow: {
     flexDirection: "row",
     justifyContent: "space-around",
     marginTop: 10,
+    padding: 10
   },
 });

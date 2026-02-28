@@ -1,19 +1,23 @@
 import { StyleSheet, TextInput, View, ScrollView, Text} from "react-native";
 import Card from "../components/Card";
 import { useState } from "react";
+import ModalDelete from "../components/ModalDelete";
 
 export default function ListCards({ cards, onPress }) {
   const [text, setText] = useState("");
 
+
   const filterCards = cards.filter((card) =>
     card.word.toLowerCase().includes(text.toLowerCase()),
   );
+
 
   return (
     <View style={styles.container}>
       <ScrollView
         style={styles.scrollView}
         contentContainerStyle={styles.scrollContent}
+          showsVerticalScrollIndicator={false}
       >
         <Card cards={text.trim() === "" ? cards : filterCards} onPress={onPress} />
       </ScrollView>
@@ -23,6 +27,7 @@ export default function ListCards({ cards, onPress }) {
           value={text}
           onChangeText={setText}
           placeholder="Поиск..."
+          placeholderTextColor="#372727"
         />
       </View>
     </View>

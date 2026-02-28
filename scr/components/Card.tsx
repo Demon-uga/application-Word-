@@ -1,9 +1,11 @@
-import { useState } from "react";
+import {  useState } from "react";
 import { View, Text, StyleSheet, TouchableWithoutFeedback } from "react-native";
 import ButtonDelete from "./ButtonDelete";
+import ModalDelete from "./ModalDelete";
 
-function CardItem({ card, onPress}) {
+function CardItem({ card, onPress }) {
   const [openTranslation, setOpenTranslation] = useState(false);
+    const [openModalDelete, setOpenModalDelete] = useState(false)
 
   return (
     <TouchableWithoutFeedback
@@ -13,45 +15,38 @@ function CardItem({ card, onPress}) {
         <View style={styles.wordAndDelete}>
           <Text style={styles.word}>{card.word}</Text>
           {openTranslation && (
-            <ButtonDelete
-              iconName="trash"
-              onPress={() => onPress(card.id)}
-            />
+            <ButtonDelete iconName="trash" onPress={() => setOpenModalDelete(true)} />
           )}
         </View>
         {openTranslation && (
           <Text style={styles.translation}>{card.translation}</Text>
         )}
         <Text style={styles.example}>{card.example}</Text>
+      <ModalDelete modal={openModalDelete} onPress={() => onPress(card.id)} onClose={() => setOpenModalDelete(false)} />
       </View>
     </TouchableWithoutFeedback>
   );
 }
 
-
-
-
-
 export default function Card({ cards, onPress }) {
-
   return (
     <View style={styles.container}>
       {cards.length === 0 ? (
-        <Text style={styles.card}>Cписок пуст</Text>
+        <Text>Cписок пуст</Text>
       ) : (
-        cards.map((card) => <CardItem key={card.id} card={card} onPress={onPress}/>)
+        cards.map((card) => (
+          <CardItem key={card.id} card={card} onPress={onPress} />
+        ))
       )}
     </View>
   );
 }
 
-
-
-
-
 const styles = StyleSheet.create({
   container: {
+    justifyContent: "center",
     alignItems: "center",
+    minHeight: 700,
     width: "100%",
   },
   card: {
@@ -92,6 +87,6 @@ const styles = StyleSheet.create({
   },
   wordAndDelete: {
     flexDirection: "row",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
   },
 });
