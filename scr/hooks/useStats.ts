@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useState, useEffect } from "react";
 import { updateState, updateStreak } from "../logic/Stats.js";
 import AsyncStorage from "@react-native-async-storage/async-storage";

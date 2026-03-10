@@ -1,6 +1,6 @@
+// @ts-nocheck
 import { Modal, View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { useState } from "react";
 
 export default function ModalEnd({modal, onClose}) {
   

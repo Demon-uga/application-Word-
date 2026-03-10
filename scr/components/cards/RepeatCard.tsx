@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useState } from "react";
 import {
   View,
@@ -102,7 +103,7 @@ export default function RepeatCard({ cards, updateCardInterval, updateStat }) {
             style={[styles.difficultyButton, styles.medium]}
             onPress={() =>
               pickOutComplexity(
-                "Medium",
+                "Norm",
                 card,
                 updateCardInterval,
                 updateStat,

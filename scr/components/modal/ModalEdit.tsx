@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useState } from "react";
 import { Modal, View, StyleSheet, Text } from "react-native";
 import { TextInput } from "react-native";

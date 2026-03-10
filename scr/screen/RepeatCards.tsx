@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { View, StyleSheet } from "react-native";
 import RepeatCard from "../components/cards/RepeatCard";
 

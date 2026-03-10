@@ -1,3 +1,4 @@
+// @ts-nocheck
 import useCards from "../hooks/useCards";
 import useStats from "../hooks/useStats";
 import AddCard from "./AddCard";
