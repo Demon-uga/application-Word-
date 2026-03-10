@@ -1,6 +1,8 @@
+// @ts-nocheck
 import { StyleSheet, TextInput, View, Button, Modal } from "react-native";
 import { useState } from "react";
-import ModalImput from "../components/ModalImput";
+import ModalImput from "../components/modal/ModalImput";
+import ButtonAdd from "../components/buttons/ButtonAdd";
 
 export default function AddCard({ onAdd }) {
   const [word, setWord] = useState("");
@@ -19,7 +21,7 @@ export default function AddCard({ onAdd }) {
     <View>
       <View style={styles.inputAndButton}>
         <TextInput style={styles.input} onChangeText={setWord} value={word} />
-        <Button title="добавить" onPress={openModal} />
+        <ButtonAdd text="Add" onPress={openModal} />
       </View>
       <ModalImput modal={modal} onSave={add} onClose={() => setModal(false)} />
     </View>

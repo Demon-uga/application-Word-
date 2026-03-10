@@ -1,26 +1,24 @@
+// @ts-nocheck
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";
 import { useState } from "react";
-import AddCard from "./scr/screen/AddCard";
-import ListCards from "./scr/screen/ListCards";
-import MyButton from "./scr/components/MyButton";
-import Cards from "./scr/hooks/Cards";
+import MyButton from "./scr/components/buttons/MyButton";
+import Buttonstatistics from "./scr/components/buttons/ButtonStatistics";
+import Content from "./scr/screen/Content";
 
 export default function App() {
   const [screen, setScreen] = useState("add");
-  const { cards, addArrCard, deleteCard } = Cards();
+
   return (
     <View style={styles.container}>
-      <View style={styles.content}>
-        {screen == "add" ? (
-          <AddCard onAdd={addArrCard} />
-        ) : (
-          <ListCards cards={cards} onPress={deleteCard}/>
-        )}
+      <View style={styles.header}>
+        <Buttonstatistics color="green" iconName="stats-chart-outline" onPress={() => setScreen("stats")} />
       </View>
+      <Content screen={screen} />
       <View style={styles.buttons}>
         <MyButton iconName="add-circle" onPress={() => setScreen("add")} />
-        <MyButton iconName="list" onPress={() => setScreen("list")} />
+        <MyButton iconName="repeat" onPress={() => setScreen("repeat")} />
+        <MyButton iconName="book" onPress={() => setScreen("list")} />
       </View>
       <StatusBar style="auto" />
     </View>
@@ -32,16 +30,18 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#c7d4fa",
     paddingTop: 50,
-    paddingBottom: 20
+    paddingBottom: 20,
   },
   buttons: {
     flexDirection: "row",
     marginBottom: 20,
-    justifyContent: "space-around"
+    justifyContent: "space-around",
   },
-  content: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+  header: {
+    marginTop: 10,
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    paddingHorizontal: 20,
+    marginBottom: 10,
   },
 });

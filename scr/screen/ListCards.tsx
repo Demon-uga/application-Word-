@@ -1,9 +1,9 @@
+// @ts-nocheck
 import { StyleSheet, TextInput, View, ScrollView, Text} from "react-native";
-import Card from "../components/Card";
+import Card from "../components/cards/Card";
 import { useState } from "react";
-import ModalDelete from "../components/ModalDelete";
 
-export default function ListCards({ cards, onPress }) {
+export default function ListCards({ cards, onPress, saveEditCard }) {
   const [text, setText] = useState("");
 
 
@@ -19,7 +19,7 @@ export default function ListCards({ cards, onPress }) {
         contentContainerStyle={styles.scrollContent}
           showsVerticalScrollIndicator={false}
       >
-        <Card cards={text.trim() === "" ? cards : filterCards} onPress={onPress} />
+        <Card cards={text.trim() === "" ? cards : filterCards} onPress={onPress} saveEditCard={saveEditCard}/>
       </ScrollView>
       <View style={styles.searchContainer}>
         <TextInput

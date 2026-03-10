@@ -1,16 +1,17 @@
+// @ts-nocheck
 import { Modal, Text, StyleSheet, View } from "react-native";
-import MyButton from "./MyButton";
+import MyButton from "../buttons/MyButton";
 
 export default function ModalDelete({ modal, onPress, onClose }) {
   return (
-    <Modal visible={modal} transparent animationType="fade">
+    <Modal visible={modal} transparent={true} animationType="fade">
       <View style={styles.modalContainer}>
         <View style={styles.modalContent}>
           <Text style={styles.title}>Are you sure?</Text>
-          
+
           <View style={styles.buttonRow}>
             <MyButton
-              text="of course!"
+              text="Of course!"
               iconName="trash"
               color="#386c3c"
               onPress={() => onPress()}

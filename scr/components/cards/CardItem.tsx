@@ -1,11 +1,14 @@
-import {  useState } from "react";
-import { View, Text, StyleSheet, TouchableWithoutFeedback } from "react-native";
-import ButtonDelete from "./ButtonDelete";
-import ModalDelete from "./ModalDelete";
+// @ts-nocheck
+import { useState } from "react";
+import { View, Text, TouchableWithoutFeedback, StyleSheet } from "react-native";
+import ButtonForCard from "../buttons/ButtonForCard";
+import ModalDelete from "../modal/ModalDelete";
+import ModalEdit from "../modal/ModalEdit";
 
-function CardItem({ card, onPress }) {
+export default function CardItem({ card, onPress, saveEditCard}) {
   const [openTranslation, setOpenTranslation] = useState(false);
-    const [openModalDelete, setOpenModalDelete] = useState(false)
+  const [openModalDelete, setOpenModalDelete] = useState(false);
+  const [openModalEdit, setOpenModalEdit] = useState(false);
 
   return (
     <TouchableWithoutFeedback
@@ -15,40 +18,40 @@ function CardItem({ card, onPress }) {
         <View style={styles.wordAndDelete}>
           <Text style={styles.word}>{card.word}</Text>
           {openTranslation && (
-            <ButtonDelete iconName="trash" onPress={() => setOpenModalDelete(true)} />
+            <View style={styles.buttonBox}>
+              <ButtonForCard
+                color="rgb(139, 143, 214)"
+                iconName="create-outline"
+                onPress={() => setOpenModalEdit(true)}
+              />
+              <ButtonForCard
+                iconName="trash"
+                onPress={() => setOpenModalDelete(true)}
+              />
+            </View>
           )}
         </View>
         {openTranslation && (
           <Text style={styles.translation}>{card.translation}</Text>
         )}
         <Text style={styles.example}>{card.example}</Text>
-      <ModalDelete modal={openModalDelete} onPress={() => onPress(card.id)} onClose={() => setOpenModalDelete(false)} />
+        <ModalDelete
+          modal={openModalDelete}
+          onPress={() => onPress(card.id)}
+          onClose={() => setOpenModalDelete(false)}
+        />
+        <ModalEdit
+          card={card}
+          modal={openModalEdit}
+          onClose={() => setOpenModalEdit(false)}
+          saveEditCard={saveEditCard}
+        />
       </View>
     </TouchableWithoutFeedback>
   );
 }
 
-export default function Card({ cards, onPress }) {
-  return (
-    <View style={styles.container}>
-      {cards.length === 0 ? (
-        <Text>Cписок пуст</Text>
-      ) : (
-        cards.map((card) => (
-          <CardItem key={card.id} card={card} onPress={onPress} />
-        ))
-      )}
-    </View>
-  );
-}
-
 const styles = StyleSheet.create({
-  container: {
-    justifyContent: "center",
-    alignItems: "center",
-    minHeight: 700,
-    width: "100%",
-  },
   card: {
     backgroundColor: "#1e293b",
     padding: 20,
@@ -70,6 +73,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#fff",
     marginBottom: 4,
+    textTransform: "capitalize" 
   },
   translation: {
     fontSize: 16,
@@ -84,9 +88,14 @@ const styles = StyleSheet.create({
     paddingTop: 8,
     borderTopWidth: 1,
     borderTopColor: "#334155",
+    textTransform: "capitalize" 
   },
   wordAndDelete: {
     flexDirection: "row",
     justifyContent: "space-between",
+  },
+  buttonBox: {
+    flexDirection: "row",
+    gap: 20,
   },
 });

@@ -1,6 +1,7 @@
+// @ts-nocheck
 import { StyleSheet, TextInput, View, Button, Modal } from "react-native";
 import { useState } from "react";
-import MyButton from "./MyButton";
+import MyButton from "../buttons/MyButton";
 
 export default function ModalImput({ modal, onSave, onClose }) {
   const [translation, setTranslation] = useState("");
@@ -23,17 +24,29 @@ export default function ModalImput({ modal, onSave, onClose }) {
             style={styles.input}
             onChangeText={setTranslation}
             value={translation}
-            placeholder="Translation..."
+            placeholderTextColor="#372727"
+            placeholder="Translation..." 
           />
           <TextInput
             style={styles.input}
             onChangeText={setExample}
             value={example}
+            placeholderTextColor="#372727"
             placeholder="example..."
           />
           <View style={styles.buttonRow}>
-            <MyButton iconName="add-circle" text="Add" color="#386c3c" onPress={addCard} />
-            <MyButton iconName="close" text="Cancel" color="rgb(141, 31, 31)" onPress={() => onClose()} />
+            <MyButton
+              iconName="add-circle"
+              text="Add"
+              color="#386c3c"
+              onPress={addCard}
+            />
+            <MyButton
+              iconName="close"
+              text="Cancel"
+              color="rgb(141, 31, 31)"
+              onPress={() => onClose()}
+            />
           </View>
         </View>
       </View>
@@ -48,7 +61,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#c9dffd",
     borderColor: "gray",
     borderWidth: 1,
-    margin: 5
+    margin: 5,
   },
   modalContainer: {
     flex: 1,
@@ -69,6 +82,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     marginTop: 10,
-    padding: 10
+    padding: 10,
   },
 });
