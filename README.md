@@ -44,39 +44,36 @@ Tech Stack
 
 Project Structure
 
-scr/
-├── components/
-│ ├── buttons/
-│ │ ├── ButtonAdd.tsx
-│ │ ├── ButtonEdit.tsx
-│ │ ├── ButtonForCard.tsx
-│ │ ├── ButtonStatistics.tsx
-│ │ └── MyButton.tsx
-│ │
-│ ├── cards/
-│ │ ├── Card.tsx
-│ │ ├── CardItem.tsx
-│ │ └── RepeatCard.tsx
-│ │
-│ └── modal/
-│ ├── ModalDelete.tsx
-│ ├── ModalEdit.tsx
-│ ├── ModalEnd.tsx
-│ └── ModalInput.tsx
-│
-├── hooks/
-│ ├── useCards.ts
-│ └── useStats.ts
-│
-├── logic/
-│ ├── RepeatLogic.js
-│ └── Stats.js
-│
-└── screens/
-├── AddCard.tsx
-├── ListCards.tsx
-├── RepeatCards.tsx
-└── Stats.tsx
+## 📁 Структура проекта
+
+- **scr/**
+  - **components/**
+    - **buttons/**
+      - `ButtonAdd.tsx` - кнопка добавления
+      - `ButtonEdit.tsx` - кнопка редактирования
+      - `ButtonForCard.tsx` - кнопка для карточки
+      - `ButtonStatistics.tsx` - кнопка статистики
+      - `MyButton.tsx` - базовая кнопка
+    - **cards/**
+      - `Card.tsx` - компонент карточки
+      - `CardItem.tsx` - элемент карточки
+      - `RepeatCard.tsx` - карточка для повторения
+    - **modal/**
+      - `ModalDelete.tsx` - модалка удаления
+      - `ModalEdit.tsx` - модалка редактирования
+      - `ModalEnd.tsx` - модалка завершения
+      - `ModalInput.tsx` - модалка ввода
+  - **hooks/**
+    - `useCards.ts` - хук для работы с карточками
+    - `useStats.ts` - хук для статистики
+  - **logic/**
+    - `RepeatLogic.js` - логика повторений
+    - `Stats.js` - логика статистики
+  - **screens/**
+    - `AddCard.tsx` - экран добавления
+    - `ListCards.tsx` - экран списка
+    - `RepeatCards.tsx` - экран повторения
+    - `Stats.tsx` - экран статистики
 
 How repetition works
 
