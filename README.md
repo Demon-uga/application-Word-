@@ -44,42 +44,39 @@ Tech Stack
 
 Project Structure
 
-src
- ├ components
- │    ├ buttons
- │    │   ├ ButtonAdd.tsx
- │    │   ├ ButtonEdit.tsx
- │    │   ├ ButtonForCard.tsx
- │    │   ├ ButtonStatistics.tsx
- │    │   └ MyButton.tsx.tsx
- │    │
- │    ├ cards
- │    │   ├ Card.tsx
- │    │   ├ CardItem.tsx
- │    │   └ RepeatCard.tsx
- │    │ 
- │    └ modal
- │        ├ ModalDelete.tsx
- │        ├ ModalEdit.tsx
- │        ├ ModalEnd.tsx
- │        └ ModalInput.tsx  
- │    
- ├ hooks
- │  ├ useCards.ts
- │  └ useStats.ts
- │
- ├ logic
- │  ├ RepeatLogic.js
- │  └ Stats.js
- │
- ├ screens
-    ├ AddCard.tsx
-    ├ RepeatCards.tsx
-    ├ ListCards.tsx
-    ├ RepeatCards.tsx
-    └ Stats.tsx
-
----
+scr/
+├── components/
+│ ├── buttons/
+│ │ ├── ButtonAdd.tsx
+│ │ ├── ButtonEdit.tsx
+│ │ ├── ButtonForCard.tsx
+│ │ ├── ButtonStatistics.tsx
+│ │ └── MyButton.tsx
+│ │
+│ ├── cards/
+│ │ ├── Card.tsx
+│ │ ├── CardItem.tsx
+│ │ └── RepeatCard.tsx
+│ │
+│ └── modal/
+│ ├── ModalDelete.tsx
+│ ├── ModalEdit.tsx
+│ ├── ModalEnd.tsx
+│ └── ModalInput.tsx
+│
+├── hooks/
+│ ├── useCards.ts
+│ └── useStats.ts
+│
+├── logic/
+│ ├── RepeatLogic.js
+│ └── Stats.js
+│
+└── screens/
+├── AddCard.tsx
+├── ListCards.tsx
+├── RepeatCards.tsx
+└── Stats.tsx
 
 How repetition works
 
