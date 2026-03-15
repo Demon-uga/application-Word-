@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { useState, useEffect } from "react";
-import { updateState, updateStreak, updateAddedToday } from "../logic/Stats.js";
+import { updateAllStats } from "../logic/Stats.js";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const STORAGE_KEY = "@vocab_stats";
@@ -51,20 +51,19 @@ export default function useStats() {
 
 const updateStat = () => {
   setStats(prev => {
-    const streakUpdated = updateStreak(prev);
-    const finalStat = updateState(streakUpdated);
+    const finalStat = updateAllStats(prev, 'repeat');
     saveStats(finalStat);
     return finalStat;
   });
 };
 
-  const updateAdded = () => {
-    setStats(prev => {
-      const newStat = updateAddedToday(prev);
-      saveStats(newStat);
-      return newStat;
-    });
-  };
+const updateAdded = () => {
+  setStats(prev => {
+    const finalStat = updateAllStats(prev, 'add');
+    saveStats(finalStat);
+    return finalStat;
+  });
+};
 
   return { stats, updateStat, updateAdded };
 }

@@ -1,66 +1,50 @@
-export function updateState(stats){
-    const toDay = new Date().toDateString()
-
-    if( toDay !== stats.lastDay){
-        return {
-            ...stats,
-            total: stats.total + 1,
-            toDay: 1,
-            lastDay: toDay
-        }
-    }
-
-    const bestDay = stats.toDay + 1 > stats.bestDay ? stats.toDay + 1 : stats.bestDay
-    return {
-        ...stats,
-        total: stats.total + 1,
-        toDay: stats.toDay + 1,
-        lastDay: toDay,
-        bestDay: bestDay
-    }
-}
-
-export function updateStreak(stats) {
-  const today = new Date();
-  const last = new Date(stats.lastDay);
-
-  const todayStr = today.toDateString();
-  const lastStr = last.toDateString();
-
-  if(stats.streak == 0){
-        return {
-            ...stats,
-            streak: 1,
-        }
-    }
-
-  if (todayStr === lastStr) return stats;
-
-  const yesterday = new Date();
-  yesterday.setDate(today.getDate() - 1);
-
-  if (lastStr === yesterday.toDateString()) {
-    return { ...stats, streak: stats.streak + 1, lastDay: todayStr };
-  }
-
-  return { ...stats, streak: 1, lastDay: todayStr };
-}
-
-
-export function updateAddedToday(stats) {
+export function updateAllStats(stats, type) {
   const today = new Date().toDateString();
+  const newStats = { ...stats };
   
-  if (today !== stats.lastAddedDay) {
-    return {
-      ...stats,
-      addedToday: 1,
-      lastAddedDay: today
-    };
+  // Новый день для повторений?
+  const isNewDayForRepeat = today !== stats.lastDay;
+  // Новый день для добавлений?
+  const isNewDayForAdd = today !== stats.lastAddedDay;
+  
+  // Обновляем повторения
+  if (type === 'repeat' || type === 'both') {
+    if (isNewDayForRepeat) {
+      newStats.toDay = 1;
+      newStats.lastDay = today;
+    } else {
+      newStats.toDay = (stats.toDay || 0) + 1;
+    }
+    newStats.total = (stats.total || 0) + 1;
+    
+    // Обновляем streak
+    if (stats.streak === 0) {
+      newStats.streak = 1;
+    } else if (isNewDayForRepeat) {
+      const yesterday = new Date();
+      yesterday.setDate(new Date().getDate() - 1);
+      if (stats.lastDay === yesterday.toDateString()) {
+        newStats.streak = (stats.streak || 0) + 1;
+      } else {
+        newStats.streak = 1;
+      }
+    }
   }
   
-  return {
-    ...stats,
-    addedToday: (stats.addedToday || 0) + 1
-  };
+  // Обновляем добавления
+  if (type === 'add' || type === 'both') {
+    if (isNewDayForAdd) {
+      newStats.addedToday = 1;
+      newStats.lastAddedDay = today;
+    } else {
+      newStats.addedToday = (stats.addedToday || 0) + 1;
+    }
+  }
+  
+  // Обновляем bestDay
+  if (newStats.toDay > (newStats.bestDay || 0)) {
+    newStats.bestDay = newStats.toDay;
+  }
+  
+  return newStats;
 }
-
