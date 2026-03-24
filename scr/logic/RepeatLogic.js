@@ -1,6 +1,9 @@
-export const randomReverseCard = (setRevers) => {
-  const isRevers = Math.random() < 0.5;
-  setRevers(isRevers); 
+export const randomReverseCard = (card) => {
+  if (card.lvl === "Ease") {
+    return Math.random() < 0.5;
+  } else {
+    return true;
+  }
 };
 
 export const iconsCheckAnswer = (answer) => {
@@ -19,11 +22,21 @@ export const filterAndSortArr = (cards) => {
   return sortArr;
 };
 
-export const checkAnswer = (value, card, setAnswer, setErrorCount, errorCount) => {
+export const checkAnswer = (
+  value,
+  card,
+  setAnswer,
+  setErrorCount,
+  errorCount,
+  revers,
+) => {
   const answerUser = value.trim().toLowerCase();
-  const translationWord = card.translation.trim().toLowerCase();
 
-  const answer = translationWord
+  const correctAnswer = revers
+    ? card.translation.trim().toLowerCase()
+    : card.word.trim().toLowerCase();
+
+  const answer = correctAnswer
     .split(/[\s,//]+/)
     .some((word) => word === answerUser || answerUser.includes(word));
 
@@ -40,30 +53,29 @@ export const pickOutComplexity = (
   setValue,
   setErrorCount,
   setModal,
-  setRevers,
-  newArr
+  newArr,
 ) => {
   if (!card) return;
-  
+
   let newInterval = card.interval || 0.5;
   const day = 24 * 60 * 60 * 1000;
-  
+
   if (lvl === "Ease") newInterval *= 2;
   else if (lvl === "Medium") newInterval *= 1.5;
   else if (lvl === "Hard") newInterval = 0.5;
-  
-  const maxInterval = 90; 
+
+  const maxInterval = 90;
   newInterval = Math.min(newInterval, maxInterval);
 
   const newCardInterval = {
     ...card,
+    lvl: lvl,
     interval: newInterval,
     nextRepeat: Date.now() + newInterval * day,
   };
-  
+
   updateCardInterval(newCardInterval);
   updateStat();
-  randomReverseCard(setRevers);
 
   if (newArr.length > 1) {
     setAnswer(null);

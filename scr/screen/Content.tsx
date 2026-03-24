@@ -9,11 +9,11 @@ import Stats from "./Stats";
 
 export default function Content({ screen }) {
   const { cards, addArrCard, deleteCard, updateCardInterval, saveEditCard } = useCards();
-    const {stats, updateStat} = useStats()
+    const {stats, updateStat, updateAdded} = useStats()
 
   return (
     <View style={styles.content}>
-      {screen == "add" && <AddCard onAdd={addArrCard} />}
+      {screen == "add" && <AddCard onAdd={addArrCard} updateAdded={updateAdded}/>}
       {screen == "list" && (
         <ListCards
           cards={cards}

@@ -17,8 +17,7 @@ export default function useCards() {
       if (saved) {
         const arr = JSON.parse(saved);
         setCards(arr.map((card) => ({
-            interval: 0,
-            nextRepeat: Date.now(),
+            lvl: "hard",
             ...card
           })),
         )
@@ -46,6 +45,7 @@ export default function useCards() {
       example,
       interval: interval,
       nextRepeat: Date.now() + interval * day,
+      lvl: "Hard"
     };
     const updated = [...cards, newCard];
     setCards(updated);

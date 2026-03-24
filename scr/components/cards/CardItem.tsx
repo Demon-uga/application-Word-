@@ -5,7 +5,7 @@ import ButtonForCard from "../buttons/ButtonForCard";
 import ModalDelete from "../modal/ModalDelete";
 import ModalEdit from "../modal/ModalEdit";
 
-export default function CardItem({ card, onPress, saveEditCard}) {
+export default function CardItem({ card, onPress, saveEditCard }) {
   const [openTranslation, setOpenTranslation] = useState(false);
   const [openModalDelete, setOpenModalDelete] = useState(false);
   const [openModalEdit, setOpenModalEdit] = useState(false);
@@ -16,7 +16,11 @@ export default function CardItem({ card, onPress, saveEditCard}) {
     >
       <View style={styles.card}>
         <View style={styles.wordAndDelete}>
-          <Text style={styles.word}>{card.word}</Text>
+          <View style={styles.wordContainer}>
+            <Text style={styles.word} ellipsizeMode="tail">
+              {card.word}
+            </Text>
+          </View>
           {openTranslation && (
             <View style={styles.buttonBox}>
               <ButtonForCard
@@ -68,13 +72,18 @@ const styles = StyleSheet.create({
     width: "90%",
     alignSelf: "center",
   },
-  word: {
-    fontSize: 20,
-    fontWeight: "bold",
-    color: "#fff",
-    marginBottom: 4,
-    textTransform: "capitalize" 
-  },
+  wordContainer: {
+  flex: 1,
+  marginRight: 10,
+},
+word: {
+  fontSize: 20,
+  fontWeight: "bold",
+  color: "#fff",
+  marginBottom: 4,
+  textTransform: "capitalize",
+  flexWrap: "wrap",
+},
   translation: {
     fontSize: 16,
     color: "#4f9eff",
@@ -88,12 +97,12 @@ const styles = StyleSheet.create({
     paddingTop: 8,
     borderTopWidth: 1,
     borderTopColor: "#334155",
-    textTransform: "capitalize" 
   },
   wordAndDelete: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
+  flexDirection: "row",
+  justifyContent: "space-between",
+  alignItems: "flex-start", 
+},
   buttonBox: {
     flexDirection: "row",
     gap: 20,

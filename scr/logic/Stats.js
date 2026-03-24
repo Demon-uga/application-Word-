@@ -1,5 +1,3 @@
-
-
 export function updateState(stats){
     const toDay = new Date().toDateString()
 
@@ -17,6 +15,7 @@ export function updateState(stats){
         ...stats,
         total: stats.total + 1,
         toDay: stats.toDay + 1,
+        lastDay: toDay,
         bestDay: bestDay
     }
 }
@@ -45,5 +44,23 @@ export function updateStreak(stats) {
   }
 
   return { ...stats, streak: 1, lastDay: todayStr };
+}
+
+
+export function updateAddedToday(stats) {
+  const today = new Date().toDateString();
+  
+  if (today !== stats.lastAddedDay) {
+    return {
+      ...stats,
+      addedToday: 1,
+      lastAddedDay: today
+    };
+  }
+  
+  return {
+    ...stats,
+    addedToday: (stats.addedToday || 0) + 1
+  };
 }
 

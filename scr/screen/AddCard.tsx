@@ -4,12 +4,13 @@ import { useState } from "react";
 import ModalImput from "../components/modal/ModalImput";
 import ButtonAdd from "../components/buttons/ButtonAdd";
 
-export default function AddCard({ onAdd }) {
+export default function AddCard({ onAdd, updateAdded }) {
   const [word, setWord] = useState("");
   const [modal, setModal] = useState(false);
 
   const add = (translation, example) => {
     onAdd(word, translation, example);
+    updateAdded();
     setWord("");
   };
 

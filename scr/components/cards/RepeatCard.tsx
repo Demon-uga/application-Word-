@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   View,
   TextInput,
@@ -15,6 +15,7 @@ import {
   filterAndSortArr,
   checkAnswer,
   pickOutComplexity,
+  randomReverseCard,
 } from "../../logic/RepeatLogic";
 
 export default function RepeatCard({ cards, updateCardInterval, updateStat }) {
@@ -26,6 +27,13 @@ export default function RepeatCard({ cards, updateCardInterval, updateStat }) {
 
   const newArr = filterAndSortArr(cards);
   const card = newArr.length > 0 && newArr[0];
+
+  useEffect(() => {
+    if (card) {
+      const newRevers = randomReverseCard(card);
+      setRevers(newRevers);
+    }
+  }, [card?.id]);
 
   if (newArr.length === 0) {
     return (
@@ -73,7 +81,16 @@ export default function RepeatCard({ cards, updateCardInterval, updateStat }) {
         <View style={styles.buttonContainer}>
           <TouchableOpacity
             style={styles.checkButton}
-            onPress={() => checkAnswer(value, card, setAnswer, setErrorCount, errorCount)}
+            onPress={() =>
+              checkAnswer(
+                value,
+                card,
+                setAnswer,
+                setErrorCount,
+                errorCount,
+                revers,
+              )
+            }
           >
             <Text style={styles.buttonText}>check</Text>
           </TouchableOpacity>
@@ -92,8 +109,7 @@ export default function RepeatCard({ cards, updateCardInterval, updateStat }) {
                 setValue,
                 setErrorCount,
                 setModal,
-                setRevers,
-                newArr
+                newArr,
               )
             }
           >
@@ -111,8 +127,7 @@ export default function RepeatCard({ cards, updateCardInterval, updateStat }) {
                 setValue,
                 setErrorCount,
                 setModal,
-                setRevers,
-                newArr
+                newArr,
               )
             }
           >
@@ -130,8 +145,7 @@ export default function RepeatCard({ cards, updateCardInterval, updateStat }) {
                 setValue,
                 setErrorCount,
                 setModal,
-                setRevers,
-                newArr
+                newArr,
               )
             }
           >

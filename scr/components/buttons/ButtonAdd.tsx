@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { TouchableOpacity, Text, StyleSheet} from "react-native";
 
 export default function ButtonAdd({text, onPress}) {
