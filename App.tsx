@@ -16,7 +16,6 @@ export default function App() {
     <View style={styles.container}>
       <View style={styles.header}>
         <View style={styles.streakContainer}>
-          <Text>{new Date().toDateString()}</Text>
           <Ionicons name="flame-outline" size={24} color="#c94609" />
           <Text style={styles.streakText}>{stats.streak}</Text>
         </View>
