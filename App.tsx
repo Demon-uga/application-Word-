@@ -10,12 +10,13 @@ import useStats from "./scr/hooks/useStats";
 
 export default function App() {
   const [screen, setScreen] = useState("add");
-  const { stats } = useStats();
+  const { stats, updateStat, updateAdded } = useStats();
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <View style={styles.streakContainer}>
+          <Text>{new Date().toDateString()}</Text>
           <Ionicons name="flame-outline" size={24} color="#c94609" />
           <Text style={styles.streakText}>{stats.streak}</Text>
         </View>
@@ -25,7 +26,12 @@ export default function App() {
           onPress={() => setScreen("stats")}
         />
       </View>
-      <Content screen={screen} />
+      <Content
+        screen={screen}
+        stats={stats}
+        updateStat={updateStat}
+        updateAdded={updateAdded}
+      />
       <View style={styles.buttons}>
         <MyButton iconName="add-circle" onPress={() => setScreen("add")} />
         <MyButton iconName="repeat" onPress={() => setScreen("repeat")} />

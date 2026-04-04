@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { useState, useEffect } from "react";
-import { updateAllStats } from "../logic/Stats.js";
+import { updateAllStats, updateStatsOnAppStart } from "../logic/Stats.js";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const STORAGE_KEY = "@vocab_stats";
@@ -32,7 +32,9 @@ export default function useStats() {
     try {
       const saved = await AsyncStorage.getItem(STORAGE_KEY);
       if (saved) {
-        setStats(JSON.parse(saved));
+        const parsedStats = JSON.parse(saved);
+        const updatedStats = updateStatsOnAppStart(parsedStats);
+        setStats(updatedStats);
       }
       setIsLoaded(true);
     } catch (error) {
@@ -49,22 +51,29 @@ export default function useStats() {
     }
   };
 
-const updateStat = () => {
-  setStats(prev => {
-    const finalStat = updateAllStats(prev, 'repeat');
-    saveStats(finalStat);
-    return finalStat;
-  });
-};
+  const saveStatsToStorage = async (statsData) => {
+    try {
+      await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(statsData));
+    } catch (error) {
+      console.log("Ошибка сохранения статистики:", error);
+    }
+  };
 
-const updateAdded = () => {
-  setStats(prev => {
-    const finalStat = updateAllStats(prev, 'add');
-    saveStats(finalStat);
-    return finalStat;
-  });
-};
+  const updateStat = () => {
+    setStats((prev) => {
+      const finalStat = updateAllStats(prev, "repeat");
+      saveStatsToStorage(finalStat);
+      return finalStat;
+    });
+  };
+
+  const updateAdded = () => {
+    setStats((prev) => {
+      const finalStat = updateAllStats(prev, "add");
+      saveStatsToStorage(finalStat);
+      return finalStat;
+    });
+  };
 
   return { stats, updateStat, updateAdded };
 }
-

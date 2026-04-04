@@ -11,26 +11,26 @@ export default function ModalEdit({ card, modal, onClose, saveEditCard }) {
   const [intervalValue, setIntervalValue] = useState(card.interval);
 
   const closeModalEdit = () => {
-    setWordValue(card.word)
-    setTransValue(card.translation)
-    setExampleValue(card.example)
-    setIntervalValue(card.interval)
-    onClose()
-  }
+    setWordValue(card.word);
+    setTransValue(card.translation);
+    setExampleValue(card.example);
+    setIntervalValue(card.interval);
+    onClose();
+  };
 
   const save = () => {
-    const day =  24 * 60 * 60 * 1000;
+    const day = 24 * 60 * 60 * 1000;
     const editCard = {
       ...card,
       word: wordValue,
       translation: translationValue,
       example: exampleValue,
-      interval: intervalValue, 
-      nextRepeat: Date.now() + intervalValue * day
-    }
-    saveEditCard(editCard)
-    onClose()
-  }
+      interval: intervalValue,
+      nextRepeat: Date.now() + intervalValue * day,
+    };
+    saveEditCard(editCard);
+    onClose();
+  };
 
   return (
     <Modal visible={modal} transparent={true} animationType="fade">
@@ -46,20 +46,42 @@ export default function ModalEdit({ card, modal, onClose, saveEditCard }) {
           </View>
           <View style={styles.card}>
             <Text style={styles.text}>Translation:</Text>
-            <TextInput style={styles.input} value={translationValue} onChangeText={setTransValue} />
+            <TextInput
+              style={styles.input}
+              value={translationValue}
+              onChangeText={setTransValue}
+            />
           </View>
           <View style={styles.card}>
             <Text style={styles.text}>Example:</Text>
-            <TextInput style={styles.input} value={exampleValue} onChangeText={setExampleValue} />
+            <TextInput
+              style={styles.input}
+              value={exampleValue}
+              onChangeText={setExampleValue}
+            />
           </View>
           <View style={styles.card}>
             <Text style={styles.text}>Repeat after</Text>
-            <TextInput style={styles.input} value={intervalValue.toString()} onChangeText={setIntervalValue} />
+            <TextInput
+              style={styles.input}
+              value={intervalValue.toString()}
+              onChangeText={setIntervalValue}
+            />
             <Text style={styles.text}>days</Text>
           </View>
           <View style={styles.buttonCase}>
-            <ButtonEdit color="#386c3c" iconName="checkmark" text="Save" onPress={() => save()} />
-            <ButtonEdit color="rgb(141, 31, 31)" iconName="close" text="Close" onPress={() => closeModalEdit()} />
+            <ButtonEdit
+              color="#386c3c"
+              iconName="checkmark"
+              text="Save"
+              onPress={() => save()}
+            />
+            <ButtonEdit
+              color="rgb(141, 31, 31)"
+              iconName="close"
+              text="Close"
+              onPress={() => closeModalEdit()}
+            />
           </View>
         </View>
       </View>
@@ -83,7 +105,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#db9567",
     gap: 15,
-    // Тени
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 10 },
     shadowOpacity: 0.3,

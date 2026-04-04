@@ -16,22 +16,24 @@ export default function useCards() {
       const saved = await AsyncStorage.getItem(STORAGE_KEY);
       if (saved) {
         const arr = JSON.parse(saved);
-        setCards(arr.map((card) => ({
-            lvl: "hard",
-            ...card
-          })),
-        )
+        console.log(`Загружено ${arr.length} карточек из хранилища`);
+        setCards(arr);
+      } else {
+        console.log("Карточки не найдены в хранилище");
+        setCards([]);
       }
     } catch (e) {
-      console.log("Ошибка загрузки карточек");
+      console.log("Ошибка загрузки карточек:", e);
+      setCards([]);
     }
   };
 
   const saveCards = async (newCards) => {
     try {
       await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(newCards));
+      console.log(`Сохранено ${newCards.length} карточек`);
     } catch (e) {
-      console.log("Ошибка сохранения карточек");
+      console.log("Ошибка сохранения карточек:", e);
     }
   };
 
@@ -45,11 +47,11 @@ export default function useCards() {
       example,
       interval: interval,
       nextRepeat: Date.now() + interval * day,
-      lvl: "Hard"
+      lvl: "Hard",
     };
     const updated = [...cards, newCard];
     setCards(updated);
-    saveCards(updated); // сохраняем
+    saveCards(updated);
   };
   const deleteCard = (id) => {
     setCards((prev) => {
@@ -61,7 +63,7 @@ export default function useCards() {
 
   const updateCardInterval = (newCardInterval) => {
     setCards((prev) => {
-      const newArr = prev.map((card) => 
+      const newArr = prev.map((card) =>
         card.id === newCardInterval.id ? newCardInterval : card,
       );
       saveCards(newArr);

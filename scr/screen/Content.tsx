@@ -1,19 +1,20 @@
 // @ts-nocheck
 import useCards from "../hooks/useCards";
-import useStats from "../hooks/useStats";
 import AddCard from "./AddCard";
 import ListCards from "./ListCards";
 import RepeatCards from "./RepeatCards";
 import { View, StyleSheet } from "react-native";
 import Stats from "./Stats";
 
-export default function Content({ screen }) {
-  const { cards, addArrCard, deleteCard, updateCardInterval, saveEditCard } = useCards();
-    const {stats, updateStat, updateAdded} = useStats()
+export default function Content({ screen, stats, updateStat, updateAdded }) {
+  const { cards, addArrCard, deleteCard, updateCardInterval, saveEditCard } =
+    useCards();
 
   return (
     <View style={styles.content}>
-      {screen == "add" && <AddCard onAdd={addArrCard} updateAdded={updateAdded}/>}
+      {screen == "add" && (
+        <AddCard onAdd={addArrCard} updateAdded={updateAdded} />
+      )}
       {screen == "list" && (
         <ListCards
           cards={cards}
@@ -22,9 +23,13 @@ export default function Content({ screen }) {
         />
       )}
       {screen == "repeat" && (
-        <RepeatCards cards={cards} updateCardInterval={updateCardInterval} updateStat={updateStat}/>
+        <RepeatCards
+          cards={cards}
+          updateCardInterval={updateCardInterval}
+          updateStat={updateStat}
+        />
       )}
-      {screen == "stats" && <Stats stats={stats} totalCard={cards.length}/>}
+      {screen == "stats" && <Stats stats={stats} totalCard={cards.length} />}
     </View>
   );
 }

@@ -234,7 +234,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   checkButton: {
-    backgroundColor: "#6366f1", // индиго
+    backgroundColor: "#6366f1",
     padding: 15,
     borderRadius: 10,
     alignItems: "center",
@@ -267,10 +267,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#d1d5db",
   },
   medium: {
-    backgroundColor: "#9ca3af", // серый
+    backgroundColor: "#9ca3af",
   },
   hard: {
-    backgroundColor: "#4b5563", // темно-серый
+    backgroundColor: "#4b5563",
   },
   emptyText: {
     fontSize: 18,
